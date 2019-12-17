@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "enzyme": "^3.10.0",
+    "jest": "^24.9.0",
+    "redux": "^4.0.4"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
