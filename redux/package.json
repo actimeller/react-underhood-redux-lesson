@@ -4,6 +4,7 @@
     "jest": "^24.9.0",
     "redux": "^4.0.4"
   },
+  "main": "redux.js",
   "scripts": {
     "test": "jest"
   }
