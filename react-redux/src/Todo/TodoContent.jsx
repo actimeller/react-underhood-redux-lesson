@@ -10,7 +10,7 @@ function TodoContent({ items, deleteItem, setActiveItemId }) {
       <div className="Todo-column">
         <h2>запланировано</h2>
         {items
-          .filter((item) => item.type === "planned")
+          .filter((item) => item.status === "planned")
           .map((item) => (
             <TodoItem key={item.id} data={item} deleteItem={deleteItem} setActiveItemId={setActiveItemId}/>
           ))}
@@ -18,7 +18,7 @@ function TodoContent({ items, deleteItem, setActiveItemId }) {
       <div className="Todo-column">
         <h2>сделано</h2>
         {items
-          .filter((item) => item.type === "done")
+          .filter((item) => item.status === "done")
           .map((item) => (
             <TodoItem key={item.id} data={item} deleteItem={deleteItem} setActiveItemId={setActiveItemId}/>
           ))}
@@ -26,7 +26,7 @@ function TodoContent({ items, deleteItem, setActiveItemId }) {
       <div className="Todo-column">
         <h2>не сделано</h2>
         {items
-          .filter((item) => item.type === "notDone")
+          .filter((item) => item.status === "notDone")
           .map((item) => (
             <TodoItem key={item.id} data={item} deleteItem={deleteItem} setActiveItemId={setActiveItemId}/>
           ))}

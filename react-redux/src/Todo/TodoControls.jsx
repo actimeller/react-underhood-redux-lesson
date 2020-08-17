@@ -8,7 +8,7 @@ class TodoControls extends React.PureComponent {
     this.state = {
       id: "",
       name: "",
-      type: "",
+      status: "",
       description: "",
     };
     this.handleChange = this.handleChange.bind(this);
@@ -65,7 +65,7 @@ class TodoControls extends React.PureComponent {
         />
         <select
           value={this.state.type}
-          name="type"
+          name="status"
           onChange={this.handleChange}
         >
           <option value="">статус</option>
