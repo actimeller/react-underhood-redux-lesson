@@ -7,29 +7,22 @@ const ADD = "ADD";
 const EDIT = "EDIT";
 const SET_ACTIVE = "SET_ACTIVE";
 
-export const incrementAction = () => ({
-  type: INCREMENT,
-});
+const createAction = (type) => {
+  return (payload) => ({
+    type, 
+    payload 
+   })
+}
 
-export const deleteAction = (value) => ({
-  type: DELETE,
-  payload: value,
-});
+export const incrementAction = createAction(INCREMENT)
 
-export const addAction = (value) => ({
-  type: ADD,
-  payload: value,
-});
+export const deleteAction = createAction(DELETE)
 
-export const editAction = (value) => ({
-  type: EDIT,
-  payload: value,
-});
+export const addAction = createAction(ADD)
 
-export const setActiveAction = (value) => ({
-  type: SET_ACTIVE,
-  payload: value,
-});
+export const editAction = createAction(EDIT)
+
+export const setActiveAction = createAction(SET_ACTIVE)
 
 export const initialState = {
   counter: 0,
