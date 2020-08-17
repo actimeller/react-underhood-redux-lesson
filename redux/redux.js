@@ -1,18 +1,18 @@
 module.exports = {
-  createStore(reducer, initialState, middlewares) {
+  applyMiddleware(store, middlewares) {
+    let dispatch = store.dispatch;
+    middlewares.forEach((middleware) => {
+      dispatch = middleware(store)(dispatch);
+    });
+    return {
+      ...store,
+      dispatch,
+    };
+  },
 
-    function applyMiddleware(store, middlewares) {
-      let dispatch = store.dispatch;
-      middlewares.forEach((middleware) => {
-        dispatch = middleware(store)(dispatch)
-      });
-      return {
-        ...store,
-        dispatch,
-      };
-    }
+  createStore(reducer, initialState, middlewares) {
     const store = new Redux(reducer, initialState);
-    if (middlewares) applyMiddleware(store, middlewares);
+    if (middlewares) module.exports.applyMiddleware(store, middlewares);
     return store;
   },
 
@@ -47,7 +47,7 @@ class Redux {
   dispatch(action) {
     this.state = this.reducer(this.state, action);
     this.subscribers.forEach((fn) => fn(this.state));
-    if (typeof action === 'function') return action(this.state) 
+    if (typeof action === "function") return action(this.state);
   }
 
   subscribe(fn) {
