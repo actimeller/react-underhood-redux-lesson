@@ -28,8 +28,7 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
 
       componentWillUnmount() {
         let store = this.context;
-        const unsubscribe = store.subscribe(this.listener);
-        unsubscribe();
+        store.subscribe(this.listener.bind(this));
       }
 
       renderHoccedComponent(store) {
