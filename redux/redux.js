@@ -11,17 +11,15 @@ module.exports = {
   },
 
   createStore(reducer, initialState, middlewares) {
-    const store = new Redux(reducer, initialState);
-    if (middlewares) module.exports.applyMiddleware(store, middlewares);
+    let store = new Redux(reducer, initialState);
+    if (middlewares)  module.exports.applyMiddleware(store, middlewares);
     return store;
   },
 
   combineReducers(reducers) {
     return (state = {}, action) => {
       const nextState = {};
-      Object.entries(reducers).forEach((reducer) => {
-        const key = reducer[0];
-        const fn = reducer[1];
+      Object.entries(reducers).forEach(([key, fn]) => {
         if (typeof fn !== "function") return;
         const result = fn(state[key], action);
         if (typeof result === "undefined")

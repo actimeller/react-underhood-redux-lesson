@@ -7,7 +7,7 @@ function Todo(props) {
   return (
     <div className="Todo">
       <TodoControls />
-      <TodoContent items={props.items} />
+      <TodoContent />
     </div>
   );
 }
