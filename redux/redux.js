@@ -1,18 +1,19 @@
+const applyMiddleware = (store, middlewares) => {
+  let dispatch = store.dispatch;
+  middlewares.forEach((middleware) => {
+    dispatch = middleware(store)(dispatch);
+  });
+  return {
+    ...store,
+    dispatch,
+  };
+}
+
 module.exports = {
-  applyMiddleware(store, middlewares) {
-    let dispatch = store.dispatch;
-    middlewares.forEach((middleware) => {
-      dispatch = middleware(store)(dispatch);
-    });
-    return {
-      ...store,
-      dispatch,
-    };
-  },
 
   createStore(reducer, initialState, middlewares) {
     let store = new Redux(reducer, initialState);
-    if (middlewares) module.exports.applyMiddleware(store, middlewares);
+    if (middlewares) applyMiddleware(store, middlewares);
     return store;
   },
 
