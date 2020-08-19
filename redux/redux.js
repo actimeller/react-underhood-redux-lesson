@@ -55,6 +55,8 @@ class Redux {
   }
 
   unsubscribe(fn) {
-    // здесь должна быть реализация
+    this.subscribers = this.subscribers.filter(
+      (subscriber) => subscriber !== fn
+    );
   }
 }
