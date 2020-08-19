@@ -9,21 +9,13 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
         this.renderHoccedComponent = this.renderHoccedComponent.bind(this);
       }
 
-      listener(newState) {
-        this.setState(newState);
+      listener() {
+        this.forceUpdate()
       }
 
       componentDidMount() {
         let store = this.context;
         store.subscribe(this.listener.bind(this));
-        const stateFromStore = store.getState();
-        this.setState(mapStateToProps(stateFromStore));
-      }
-
-      componentDidUpdate() {
-        let store = this.context;
-        const stateFromStore = store.getState();
-        this.setState(mapStateToProps(stateFromStore));
       }
 
       componentWillUnmount() {
@@ -32,10 +24,12 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
       }
 
       renderHoccedComponent(store) {
+        const stateFromStore = store.getState();
+        const state = mapStateToProps && mapStateToProps(stateFromStore);
         const dispatch =
           mapDispatchToProps && mapDispatchToProps(store.dispatch.bind(store));
         return (
-          <HoccedComponent {...this.props} {...this.state} {...dispatch} />
+          <HoccedComponent {...this.props} {...state} {...dispatch} />
         );
       }
 

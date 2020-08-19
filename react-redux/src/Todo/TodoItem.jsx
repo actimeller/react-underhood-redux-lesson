@@ -1,4 +1,6 @@
 import React from "react";
+import connect from "../Connect/Connect";
+import { deleteAction, setActiveAction } from "../Reducer/Reducer";
 
 function TodoItem({ data, deleteItem, setActiveItemId }) {
   const { name, description, id } = data;
@@ -15,4 +17,15 @@ function TodoItem({ data, deleteItem, setActiveItemId }) {
   );
 }
 
-export default TodoItem
+
+export default connect(
+  null,
+  (dispatch) => ({
+    deleteItem: (id) => {
+      dispatch(deleteAction(id));
+    },
+    setActiveItemId: (id) => {
+      dispatch(setActiveAction(id));
+    },
+  })
+)(TodoItem);

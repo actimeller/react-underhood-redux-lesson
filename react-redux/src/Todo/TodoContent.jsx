@@ -1,49 +1,21 @@
 import React from "react";
 import connect from "../Connect/Connect";
-import { deleteAction, setActiveAction } from "../Reducer/Reducer";
-import TodoItem from "./TodoItem";
+import TodoColumn from "./TodoColumn";
 
-function TodoContent({ items, deleteItem, setActiveItemId }) {
-  if (!items) return null;
+function TodoContent({ plannedItems, done, notDone }) {
   return (
     <div className="Todo-content">
-      <div className="Todo-column">
-        <h2>запланировано</h2>
-        {items
-          .filter((item) => item.status === "planned")
-          .map((item) => (
-            <TodoItem key={item.id} data={item} deleteItem={deleteItem} setActiveItemId={setActiveItemId}/>
-          ))}
-      </div>
-      <div className="Todo-column">
-        <h2>сделано</h2>
-        {items
-          .filter((item) => item.status === "done")
-          .map((item) => (
-            <TodoItem key={item.id} data={item} deleteItem={deleteItem} setActiveItemId={setActiveItemId}/>
-          ))}
-      </div>
-      <div className="Todo-column">
-        <h2>не сделано</h2>
-        {items
-          .filter((item) => item.status === "notDone")
-          .map((item) => (
-            <TodoItem key={item.id} data={item} deleteItem={deleteItem} setActiveItemId={setActiveItemId}/>
-          ))}
-      </div>
+      <TodoColumn name="запланировано" items={plannedItems}/>
+      <TodoColumn name="сделано" items={done}/>
+      <TodoColumn name="не сделано" items={notDone}/>
     </div>
   );
 }
 
 export default connect(
-  ({ items }) => ({ items }),
-  (dispatch) => ({
-    deleteItem: (id) => {
-      dispatch(deleteAction(id));
-    },
-    setActiveItemId: (id) => {
-      dispatch(setActiveAction(id));
-    },
-
-  })
+  ({ items }) => ({ 
+    plannedItems: items.filter((item) => item.status === "planned"),
+    done: items.filter((item) => item.status === "done"),
+    notDone: items.filter((item) => item.status === "notDone")
+   })
 )(TodoContent);
