@@ -3,10 +3,6 @@ const applyMiddleware = (store, middlewares) => {
   middlewares.forEach((middleware) => {
     dispatch = middleware(store)(dispatch);
   });
-  return {
-    ...store,
-    dispatch,
-  };
 }
 
 module.exports = {
