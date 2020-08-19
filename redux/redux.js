@@ -4,10 +4,7 @@ module.exports = {
     middlewares.forEach((middleware) => {
       dispatch = middleware(store)(dispatch);
     });
-    return {
-      ...store,
-      dispatch,
-    };
+
   },
 
   createStore(reducer, initialState, middlewares) {
