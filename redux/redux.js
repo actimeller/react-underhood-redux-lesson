@@ -4,12 +4,15 @@ module.exports = {
     middlewares.forEach((middleware) => {
       dispatch = middleware(store)(dispatch);
     });
-
+    return {
+      ...store,
+      dispatch,
+    };
   },
 
   createStore(reducer, initialState, middlewares) {
     let store = new Redux(reducer, initialState);
-    if (middlewares)  module.exports.applyMiddleware(store, middlewares);
+    if (middlewares) module.exports.applyMiddleware(store, middlewares);
     return store;
   },
 
@@ -30,8 +33,7 @@ module.exports = {
 
 class Redux {
   constructor(reducer, initialState) {
-    this.reducer = reducer;
-    this.reducer = this.reducer.bind(this);
+    this.reducer = reducer.bind(this);
     this.state = initialState || reducer();
     this.subscribers = [];
   }
