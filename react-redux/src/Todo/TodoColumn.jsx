@@ -2,9 +2,6 @@ import React from "react";
 import TodoItem from "./TodoItem";
 
 class TodoColumn extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const { name, items } = this.props;
