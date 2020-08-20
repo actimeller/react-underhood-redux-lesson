@@ -39,14 +39,14 @@ class TodoControls extends React.PureComponent {
   componentDidUpdate() {
     const { items, activeItemId } = this.props;
     if (this.state.id !== activeItemId) {
-      const activeItem = items.filter((item) => item.id === activeItemId)[0];
+      const activeItem = items.find((item) => item.id === activeItemId);
       this.setState(activeItem || { id: activeItemId });
     }
   }
 
   render() {
     const { activeItemId, items } = this.props;
-    if (!activeItemId || activeItemId === null)
+    if (activeItemId == null)
       return (
         <div>
           <button type="button" onClick={this.handleNew}>
