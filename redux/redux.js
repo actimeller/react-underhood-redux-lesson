@@ -3,13 +3,17 @@ const applyMiddleware = (store, middlewares) => {
   middlewares.forEach((middleware) => {
     dispatch = middleware(store)(dispatch);
   });
+  return {
+    ...store,
+    dispatch,
+  };
 }
 
 module.exports = {
 
   createStore(reducer, initialState, middlewares) {
     let store = new Redux(reducer, initialState);
-    if (middlewares) applyMiddleware(store, middlewares);
+    if (middlewares) store = applyMiddleware(store, middlewares);
     return store;
   },
 
@@ -32,6 +36,8 @@ class Redux {
   constructor(reducer, initialState) {
     this.reducer = reducer.bind(this);
     this.state = initialState || reducer();
+    this.dispatch = this.dispatch.bind(this)
+    this.getState = this.getState.bind(this)
     this.subscribers = [];
   }
   getState() {

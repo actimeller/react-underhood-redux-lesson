@@ -1,5 +1,4 @@
 import React from "react";
-import connect from "../Connect/Connect";
 import TodoContent from "./TodoContent";
 import TodoControls from "./TodoControls";
 
