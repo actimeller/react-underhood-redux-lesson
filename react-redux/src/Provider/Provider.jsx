@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-export const ReactReduxContext = null // здесь должна быть реализация
+export const ReactReduxContext = React.createContext(null);
 
-function Provider() {
-    return null; // здесь должна быть реализация
+function Provider({store, children}) {
+  return <ReactReduxContext.Provider value={store}>
+      {children}
+  </ReactReduxContext.Provider>;
 }
 
 export default Provider;
