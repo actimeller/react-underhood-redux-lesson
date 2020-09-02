@@ -3,6 +3,7 @@ import connect from "../Connect/Connect";
 import TodoColumn from "./TodoColumn";
 
 function TodoContent({ plannedItems, done, notDone }) {
+  // console.info( plannedItems, done, notDone);
   return (
     <div className="Todo-content">
       <TodoColumn name="запланировано" items={plannedItems}/>

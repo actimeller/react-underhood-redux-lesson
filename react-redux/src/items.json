@@ -2,12 +2,24 @@
     {
       "id": 1,
       "name": "таска 1",
-      "status": "done",
+      "status": "planned",
       "description": "lorem lorem"
     },
     {
       "id": 2,
       "name": "таска 2",
+      "status": "planned",
+      "description": "lorem ipsum"
+    },
+    {
+      "id": 3,
+      "name": "таска 3",
+      "status": "planned",
+      "description": "lorem lorem"
+    },
+    {
+      "id": 4,
+      "name": "таска 4",
       "status": "planned",
       "description": "lorem ipsum"
     }

@@ -1,4 +1,3 @@
-import items from "../items.json";
 import { combineReducers } from "redux";
 
 const INCREMENT = "INCREMENT";
@@ -26,7 +25,7 @@ export const setActiveAction = createAction(SET_ACTIVE)
 
 export const initialState = {
   counter: 0,
-  items,
+  items: [],
   activeItemId: null
 };
 

@@ -103,8 +103,8 @@ export default connect(
     editItem: (item) => {
       dispatch(editAction(item));
     },
-    addItem: (id) => {
-      dispatch(addAction(id));
+    addItem: (item) => {
+      dispatch(addAction(item));
     },
     setActiveItemId: (id) => {
       dispatch(setActiveAction(id));
