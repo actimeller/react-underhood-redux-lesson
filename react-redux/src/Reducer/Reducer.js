@@ -5,6 +5,7 @@ const DELETE = "DELETE";
 const ADD = "ADD";
 const EDIT = "EDIT";
 const SET_ACTIVE = "SET_ACTIVE";
+const DISABLE_RENDER = "DISABLE_RENDER";
 
 const createAction = (type) => {
   return (payload) => ({
@@ -23,10 +24,13 @@ export const editAction = createAction(EDIT)
 
 export const setActiveAction = createAction(SET_ACTIVE)
 
+export const disableRenderAction = createAction(DISABLE_RENDER)
+
 export const initialState = {
   counter: 0,
   items: [],
-  activeItemId: null
+  activeItemId: null,
+  disableRender: false
 };
 
 export const incrementReducer = (state, action) => {
@@ -62,8 +66,18 @@ export const activeItemReducer = (state, action) => {
   }
 };
 
+export const disableRenderReducer = (state, action) => {
+  switch (action.type) {
+    case DISABLE_RENDER:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const reducer = combineReducers({
   counter: incrementReducer,
   items: itemsReducer,
   activeItemId: activeItemReducer,
+  disableRender: disableRenderReducer,
 });

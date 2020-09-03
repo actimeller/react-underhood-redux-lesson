@@ -2,7 +2,7 @@ import React from "react";
 import TodoContent from "./TodoContent";
 import TodoControls from "./TodoControls";
 import connect from "../Connect/Connect";
-import { addAction, editAction } from "../Reducer/Reducer";
+import { addAction, editAction, disableRenderAction } from "../Reducer/Reducer";
 import response from "../items.json";
 
 class Todo extends React.PureComponent {
@@ -11,11 +11,18 @@ class Todo extends React.PureComponent {
     this.getItems = this.getItems.bind(this);
   }
   getItems = () => {
-    response.forEach((item) => {
-      if (Math.random() >= 0.5) item.status = "done"
-      this.props.items.find((x) => x.id === item.id)
-        ? this.props.editItem(item)
-        : this.props.addItem(item);
+    Promise.resolve().then(() => {
+      this.props.disableRender(true);
+      try {
+        response.forEach((item) => {
+          if (Math.random() >= 0.5) item.status = "done";
+          this.props.items.find((x) => x.id === item.id)
+            ? this.props.editItem(item)
+            : this.props.addItem(item);
+        });
+      } finally {
+        this.props.disableRender(false);
+      }
     });
   };
   componentWillMount() {
@@ -39,6 +46,9 @@ export default connect(
     },
     editItem: (item) => {
       dispatch(editAction(item));
+    },
+    disableRender: (disable) => {
+      dispatch(disableRenderAction(disable));
     },
   })
 )(Todo);

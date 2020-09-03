@@ -9,8 +9,8 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
         this.renderHoccedComponent = this.renderHoccedComponent.bind(this);
       }
 
-      listener() {
-        this.forceUpdate()
+      listener({disableRender}) {
+        if (!disableRender) this.forceUpdate()
       }
 
       componentDidMount() {
