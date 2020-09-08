@@ -14,8 +14,9 @@ class Todo extends React.PureComponent {
     Promise.resolve().then(() => {
       this.props.disableRender(true);
       try {
-        response.forEach((item) => {
-          if (Math.random() >= 0.5) item.status = "done";
+        [...response, ...this.props.items].forEach((item) => {
+          if (Math.random() >= 0.5 && item.status === "planned")
+            item.status = "done";
           this.props.items.find((x) => x.id === item.id)
             ? this.props.editItem(item)
             : this.props.addItem(item);
