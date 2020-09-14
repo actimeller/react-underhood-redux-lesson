@@ -4,7 +4,7 @@ const normalize = (input, schema) => {
   }
 
   if (Array.isArray(input)) {
-    input.forEach((item) => normalize(item, schema));
+   return input.map((item) => normalize(item, schema));
   }
 
   const object = { ...input };
@@ -13,7 +13,6 @@ const normalize = (input, schema) => {
     if (value === undefined || value === null) {
       delete object[key];
     } else {
-        console.info(234);
       object[key] = value;
     }
   });
