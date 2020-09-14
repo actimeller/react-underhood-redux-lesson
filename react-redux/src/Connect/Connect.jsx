@@ -10,6 +10,7 @@ export default function connect(mapStateToProps, mapDispatchToProps) {
       }
 
       listener({disableRender}) {
+        // console.info(disableRender);
         if (!disableRender) this.forceUpdate()
       }
 

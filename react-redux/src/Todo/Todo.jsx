@@ -3,6 +3,7 @@ import TodoContent from "./TodoContent";
 import TodoControls from "./TodoControls";
 import connect from "../Connect/Connect";
 import { addAction, editAction, disableRenderAction } from "../Reducer/Reducer";
+import createSelector from "../utils/createSelector";
 import response from "../items.json";
 
 class Todo extends React.PureComponent {
@@ -26,7 +27,7 @@ class Todo extends React.PureComponent {
       }
     });
   };
-  componentWillMount() {
+  componentDidMount() {
     setInterval(this.getItems, 2000);
   }
   render() {
@@ -40,7 +41,15 @@ class Todo extends React.PureComponent {
 }
 
 export default connect(
-  ({ items }) => ({ items }),
+  (store) => {
+    return {
+      items: createSelector(
+        ({ items }) => items,
+        (items) => items
+      )(store),
+    };
+  },
+
   (dispatch) => ({
     addItem: (item) => {
       dispatch(addAction(item));
