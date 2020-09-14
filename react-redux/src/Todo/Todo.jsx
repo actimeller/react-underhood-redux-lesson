@@ -3,15 +3,15 @@ import TodoContent from "./TodoContent";
 import TodoControls from "./TodoControls";
 import connect from "../Connect/Connect";
 import { addAction, editAction, disableRenderAction } from "../Reducer/Reducer";
-import createSelector from "../utils/createSelector";
 import response from "../items.json";
+import getItems from "../selectors/getItems";
 
 class Todo extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.getItems = this.getItems.bind(this);
+    this.fetchItems = this.fetchItems.bind(this);
   }
-  getItems = () => {
+  fetchItems = () => {
     Promise.resolve().then(() => {
       this.props.disableRender(true);
       try {
@@ -28,7 +28,7 @@ class Todo extends React.PureComponent {
     });
   };
   componentDidMount() {
-    setInterval(this.getItems, 2000);
+    setInterval(this.fetchItems, 2000);
   }
   render() {
     return (
@@ -41,14 +41,9 @@ class Todo extends React.PureComponent {
 }
 
 export default connect(
-  (store) => {
-    return {
-      items: createSelector(
-        ({ items }) => items,
-        (items) => items
-      )(store),
-    };
-  },
+  ({ items }) => ({
+    items: getItems({ items }),
+  }),
 
   (dispatch) => ({
     addItem: (item) => {
