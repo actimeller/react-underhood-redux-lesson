@@ -4,20 +4,18 @@ const createSelector = (...funcs) => {
     const resultFunc = funcs.pop();
     const dependencies = funcs;
 
-    const memoizedResultFunc = memoize(function () {
-      return resultFunc.apply(null, arguments);
-    });
+    const memoizedResultFunc = memoize(resultFunc);
 
-    const selector = memoize(function () {
+    const selector = function (...args) {
       const params = [];
       const length = dependencies.length;
 
       for (let i = 0; i < length; i++) {
-        params.push(dependencies[i].apply(null, arguments));
+        params.push(dependencies[i](...args));
       }
 
-      return memoizedResultFunc.apply(null, params);
-    });
+      return memoizedResultFunc(...params);
+    };
 
     return selector;
 };
