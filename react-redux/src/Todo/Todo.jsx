@@ -41,8 +41,8 @@ class Todo extends React.PureComponent {
 }
 
 export default connect(
-  ({ items }) => ({
-    items: getItems({ items }),
+  (store) => ({
+    items: getItems(store),
   }),
 
   (dispatch) => ({
