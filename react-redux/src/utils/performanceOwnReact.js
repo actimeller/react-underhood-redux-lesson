@@ -10,14 +10,17 @@ const performanceOwnReact = {
   disabled: false,
 
   start(name) {
+    if (!performance.mark) return false;
     performance.mark(`${name} start`);
   },
 
   end(name) {
-    performance.mark(`${name} end`);
+    if (!performance.mark) return false;
+    performance.mark(`${name} end`); 
   },
 
   measure(name) {
+    if (!performance.measure) return false;
     if (this.disabled) return false;
     const { duration } = performance.measure(
       `${name} measure`,

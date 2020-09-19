@@ -5,10 +5,6 @@ import connect from "../Connect/Connect";
 import { addAction, editAction, disableRenderAction } from "../Reducer/Reducer";
 import response from "../items.json";
 import getItems from "../selectors/getItems";
-import { normalizerByPropertyName } from "../utils/normalize";
-
-console.info(normalizerByPropertyName(response, "id"));
-console.info(normalizerByPropertyName(response, "name"));
 
 class Todo extends React.PureComponent {
   constructor(props) {

@@ -1,7 +1,7 @@
 [
     {
       "id": 112,
-      "name": "таска 1",
+      "name": "таска 112",
       "status": "planned",
       "description": "lorem lorem"
     },
@@ -19,7 +19,7 @@
     },
     {
       "id": 404,
-      "name": "таска 4",
+      "name": "таска 404",
       "status": "planned",
       "description": "lorem ipsum"
     }
