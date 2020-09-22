@@ -1,6 +1,7 @@
 import React from "react";
 import connect from "../Connect/Connect";
 import { setActiveAction, editAction, addAction } from "../Reducer/Reducer";
+import getItems from "../selectors/getItems";
 
 class TodoControls extends React.PureComponent {
   constructor(props) {
@@ -98,13 +99,16 @@ class TodoControls extends React.PureComponent {
 }
 
 export default connect(
-  ({ items, activeItemId }) => ({ items, activeItemId }),
+  ({ items, activeItemId }) => ({
+    items: getItems({items}),
+    activeItemId,
+  }),
   (dispatch) => ({
     editItem: (item) => {
       dispatch(editAction(item));
     },
-    addItem: (id) => {
-      dispatch(addAction(id));
+    addItem: (item) => {
+      dispatch(addAction(item));
     },
     setActiveItemId: (id) => {
       dispatch(setActiveAction(id));
